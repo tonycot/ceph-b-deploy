@@ -1,26 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Prefight for ceph-deploy
 
-# Functions
+# Including variables and functions
 
-function ipvar {
-  for i in `seq 1 $1`
-    do
-      read  -p "Enter the ip address of node ${i}: " sshk
-      echo -e "Host node${i} \n  Hostname ${sshk} \n  User $usrn \n" >> $HOME/.ssh/config
-      ssh-copy-id ${usrn}@${sshk}
-    done
-}
 
-# Variables
-
-usrn="root"
-release="hammer"
-distro="el7"
-
-sfile="${HOME}/ceph-b-deploy/templates/ceph.repo"
-dfile="/etc/yum.repos.d/ceph.repo"
+source ../files/varrc.sh
+source ../files/func.sh
 
 # Keygen
 

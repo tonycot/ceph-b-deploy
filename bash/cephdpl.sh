@@ -1,25 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 #
 
-# Functions
-function count {
-  for i in `seq 1 $1`
-    do
-      sleep $1 && echo -n "."
-    done
-  echo -e " \n "
-}
+# Include variables and functions
+source ../files/varrc.sh
+source ../files/func.sh
 
-function echos {
-  echo -e " $1 $2 $3 \n "
-}
-
-
-# Variables
-
-osdir="/var/local/osd"
-diro="/root/mycepho"
 
 # Main Functionality
 
