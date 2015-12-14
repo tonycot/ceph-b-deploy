@@ -7,8 +7,8 @@
 function ipvar {
   for i in `seq 1 $1`
     do
-      read  -p "Enter ip address of node ${i}: " sshk
-      echo -e "Host node${i} \n  Hostname node${sshk} \n  User $usrn \n" >> $HOME/.ssh/config
+      read  -p "Enter the ip address of node ${i}: " sshk
+      echo -e "Host node${i} \n  Hostname ${sshk} \n  User $usrn \n" >> $HOME/.ssh/config
       ssh-copy-id ${usrn}@${sshk}
     done
 }
