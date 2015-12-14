@@ -8,6 +8,7 @@ function count {
     do
       sleep $1 && echo -n "."
     done
+  echo -e " \n "
 }
 
 function echos {
@@ -47,16 +48,17 @@ count 2
 echos Create monitor on $hnm
 ceph-deploy mon create-initial
 count 2
-for i in 1 2 3
+
+for i in 0 1 2
   do
-    echos Preparing $osdir$i
+    echos Preparing $osdir$i;
     mkdir -p $osdir$i
     echos Preparing $osdir$i
     ceph-deploy osd prepare $hnm:$osdir$i
-    count 2
+    sleep 4
     echos Activating $osdir$i
     ceph-deploy osd activate $hnm:$osdir$i
-    count 2
+    sleep 4
   done
 
 ceph osd tree
