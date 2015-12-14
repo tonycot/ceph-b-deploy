@@ -19,7 +19,7 @@ function echos {
 
 osdir="/var/local/osd"
 diro="/root/mycepho"
-
+log="$diro/logs"
 
 # Main Functionality
 
@@ -37,15 +37,15 @@ echos Starting the prefight
 sh pre.sh
 
 echos Ceph-deploy diro: $diro
-mkdir -p $diro && cd $diro
+mkdir -p $diro $log && cd $diro
 
 echos Creating the config
-ceph-deploy new $hnm
+ceph-deploy new $hnm > $log/cdep.log
 
-echo "osd_pool_default_size = 2" >> $diro/ceph.conf && ceph-deploy install $hnm
+echo "osd_pool_default_size = 2" >> $diro/ceph.conf && ceph-deploy install $hnm >> $log/cdep.log
 count 2
 
-
+exit
 for i in 0 1 2
   do
     echos Creating $osdir$i
@@ -53,16 +53,16 @@ for i in 0 1 2
   done
 count 2
 
-ceph-deploy mon create-initial
+ceph-deploy mon create-initial > $log/mncrt.log
 count 2
 
 for i in 0 1 2
   do
     echos Preparing $osdir$i
-    ceph-deploy osd prepare $hnm:$osdir$i
+    ceph-deploy osd prepare $hnm:$osdir$i > $log/osdp${i}.log
     count 1
     echos Preparing $osdir$i
-    ceph-deploy osd activate $hnm:$osdir$i
+    ceph-deploy osd activate $hnm:$osdir$i > $log/osdc${i}.log
   done
 count 2
 
