@@ -2,36 +2,69 @@
 #
 #
 
-# The main functionality
-read  -p "Enter hostname" hnm
-osdir = "/var/local/osd"
-diro = "/root/mycepho"
+# Functions
+function count {
+  for i in `seq 1 $1`
+    do
+      sleep $1 && echo -n "."
+    done
+}
 
+function echos {
+  echo -e " $1 $2 $3 \n "
+}
+
+
+# Variables
+
+osdir="/var/local/osd"
+diro="/root/mycepho"
+
+
+# Main Functionality
+
+read  -p "Enter the hostname: " hnm
+
+echos Hostname is $hnm
+
+if [[ $(ping -c 1 -q $hnm 2>&1) = "ping: unknown host $hnm" ]]
+  then
+    echo "Unknown hostname: ${hnm}, Fix the /etc/hosts file" && exit
+fi
+
+echos Starting the prefight
+
+sh pre.sh
+
+echos Ceph-deploy diro: $diro
 mkdir -p $diro && cd $diro
 
+echos Creating the config
 ceph-deploy new $hnm
 
-echo "osd_pool_default_size = 2" >> $diro/ceph.conf
+echo "osd_pool_default_size = 2" >> $diro/ceph.conf && ceph-deploy install $hnm
+count 2
 
-ceph-deploy install $hnm
-sleep 2
 
 for i in 0 1 2
   do
+    echos Creating $osdir$i
     mkdir -p $osdir$i
   done
-sleep 2
+count 2
 
 ceph-deploy mon create-initial
-sleep 2
+count 2
 
 for i in 0 1 2
   do
+    echos Preparing $osdir$i
     ceph-deploy osd prepare $hnm:$osdir$i
-    sleep 1
+    count 1
+    echos Preparing $osdir$i
     ceph-deploy osd activate $hnm:$osdir$i
   done
-sleep 2
+count 2
 
 ceph osd tree
 
