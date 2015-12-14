@@ -24,7 +24,7 @@ dfile="/etc/yum.repos.d/ceph.repo"
 
 # Keygen
 
-ssh-keygen -t rsa -N "" -f ~/.ssh/id_rs
+ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 read  -p "Enter the number of nodes: " nnumb
 ipvar $nnumb
 
