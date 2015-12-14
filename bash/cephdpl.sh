@@ -9,13 +9,13 @@ source ../files/func.sh
 
 # Main Functionality
 
-read  -p "Enter the hostname: " hnm
+read  -p "Enter the hostname: " hust
 
-echos Hostname is $hnm
+echos Hostname is $hust
 
-if [[ $(ping -c 1 -q $hnm 2>&1) = "ping: unknown host $hnm" ]]
+if [[ $(ping -c 1 -q $hust 2>&1) = "ping: unknown host $hnm" ]]
   then
-    echo "Unknown hostname: ${hnm}, Fix the /etc/hosts file" && exit
+    echo "Unknown hostname: ${hust}, Fix the /etc/hosts file" && exit
 fi
 
 echos Starting the prefight
