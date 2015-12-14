@@ -12,7 +12,7 @@ dfile="/etc/yum.repos.d/ceph.repo"
 nodefile="nodes.txt"
 
 # Variables
-srn="root"
+usrn="root"
 release="hammer"
 distro="el7"
 hnm=` cat $diro/$nodefile `
