@@ -51,6 +51,7 @@ for i in 0 1 2
   done
 count 2
 
+echos Create monitor on $hnm
 ceph-deploy mon create-initial
 count 2
 
