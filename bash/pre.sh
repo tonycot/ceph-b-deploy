@@ -12,7 +12,7 @@ source ../files/func.sh
 mkdir -p $diro
 
 # Keygen
-ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && touch $HOME/.ssh/config
 read  -p "Enter the number of nodes: " nnumb
 ipvar $nnumb
 
