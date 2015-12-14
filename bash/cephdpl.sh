@@ -49,12 +49,12 @@ ceph-deploy mon create-initial
 count 2
 for i in 1 2 3
   do
-    echos Creating $osdir$i
+    echos Preparing $osdir$i
     mkdir -p $osdir$i
     echos Preparing $osdir$i
     ceph-deploy osd prepare $hnm:$osdir$i
     count 2
-    echos Preparing $osdir$i
+    echos Activating $osdir$i
     ceph-deploy osd activate $hnm:$osdir$i
     count 2
   done
