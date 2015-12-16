@@ -8,8 +8,10 @@
 source ../files/varrc.sh
 source ../files/func.sh
 
-# Keygen
+# Ceph dir preparation
+mkdir -p $diro
 
+# Keygen
 ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 read  -p "Enter the number of nodes: " nnumb
 ipvar $nnumb

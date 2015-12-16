@@ -23,10 +23,14 @@ echos Starting the prefight
 sh pre.sh
 
 echos Ceph-deploy diro: $diro
-mkdir -p $diro && cd $diro
+cd $diro
 
 echos Creating the config
-ceph-deploy new $hnm
+
+# to do
+ceph-deploy new `$( cat $nodefile )`
+
+# to do
 
 echo "osd_pool_default_size = 2" >> $diro/ceph.conf && ceph-deploy install $hnm
 count 2

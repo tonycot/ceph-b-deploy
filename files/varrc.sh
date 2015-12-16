@@ -9,7 +9,7 @@ diro="/root/mycepho"
 # Files 
 sfile="${HOME}/ceph-b-deploy/templates/ceph.repo"
 dfile="/etc/yum.repos.d/ceph.repo"
-nodefile="nodes.file"
+nodefile="nodes.txt"
 
 # Variables
 srn="root"

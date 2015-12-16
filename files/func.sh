@@ -31,7 +31,7 @@ function echos {
   echo -e " $1 $2 $3 \n "
 }
 
-function count {
+function nodman {
   for i in `seq 1 $nnumb`
     do
       echo node${i} >> /   
