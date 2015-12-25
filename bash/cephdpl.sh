@@ -28,27 +28,30 @@ cd $diro
 echos Creating the config
 
 # to do
-ceph-deploy new `$( cat $nodefile )`
+ceph-deploy new $hnm
 
 # to do
 
 echo "osd_pool_default_size = 2" >> $diro/ceph.conf && ceph-deploy install $hnm
 count 2
 
-echos Create monitor on $hnm
+echos Create initial monitor
 ceph-deploy mon create-initial
 count 2
 
 for i in 0 1 2
   do
-    echos Preparing $osdir$i;
-    mkdir -p $osdir$i
-    echos Preparing $osdir$i
-    ceph-deploy osd prepare $hnm:$osdir$i
-    sleep 4
-    echos Activating $osdir$i
-    ceph-deploy osd activate $hnm:$osdir$i
-    sleep 4
+    for k in $hnm
+      do
+        echos Preparing $k:$osdir$i
+        mkdir -p $k:$osdir$i
+        echos Preparing $k:$osdir$i
+        ceph-deploy osd prepare $k:$osdir$i
+        sleep 4
+        echos Activating $k:$osdir$i
+        ceph-deploy osd activate $k:$osdir$i
+        sleep 4
+      done
   done
 
 ceph osd tree

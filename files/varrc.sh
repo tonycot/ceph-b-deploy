@@ -15,3 +15,4 @@ nodefile="nodes.txt"
 srn="root"
 release="hammer"
 distro="el7"
+hnm=` cat $diro/$nodefile `
